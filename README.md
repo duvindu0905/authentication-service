@@ -3,8 +3,8 @@ nibm index - YR3COBSCCOMP232P-007
 
 Api for authentication service 
 
-url: https://api.ntcadminservice.bussewaya.online
+url: https://api.authenticationservice.bussewaya.online
 
-example: https://api.ntcadminservice.bussewaya.online/ntcadmin-service/ntcadmins
+example: https://api.authenticationservice.bussewaya.online/authentication-service/login
 
-swagger url: https://api.ntcadminservice.bussewaya.online/api-docs/#/
+swagger url: https://api.authenticationservice.bussewaya.online/api-docs/#/
