@@ -1,0 +1,209 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Authentication Service API",
+      "description": "API for managing authentication and user management in the system.",
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8088",
+        "description": "Local Development Server"
+      },
+      {
+        "url": "https://api.authenticationservice.bussewaya.online",
+        "description": "Production Server"
+      }
+    ],
+    "paths": {
+      "/authentication/login": {
+        "post": {
+          "summary": "Login to the system",
+          "tags": ["Authentication"],
+          "operationId": "login",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["username", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid credentials"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "/authentication/users": {
+        "post": {
+          "summary": "Login as operator or admin",
+          "tags": ["Authentication"],
+          "operationId": "loginUser",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["username", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid credentials"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "/authentication/users": {
+        "get": {
+          "summary": "Get all users (operators and admins)",
+          "tags": ["Authentication"],
+          "operationId": "getAllUsers",
+          "responses": {
+            "200": {
+              "description": "List of all users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "/authentication/users": {
+        "post": {
+          "summary": "Register a new user (operator or admin)",
+          "tags": ["Authentication"],
+          "operationId": "registerUser",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User registered successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid user data"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "number"
+            },
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string",
+              "enum": ["admin", "operator"]
+            },
+            "email": {
+              "type": "string"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": ["username", "password", "role"]
+        }
+      }
+    }
+  }
+  
