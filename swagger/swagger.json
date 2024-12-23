@@ -65,7 +65,7 @@
           }
         }
       },
-      "/authentication/users": {
+      "/authentication/users/login": {
         "post": {
           "summary": "Login as operator or admin",
           "tags": ["Authentication"],
@@ -137,9 +137,7 @@
               "description": "Internal Server Error"
             }
           }
-        }
-      },
-      "/authentication/users": {
+        },
         "post": {
           "summary": "Register a new user (operator or admin)",
           "tags": ["Authentication"],
