@@ -36,4 +36,3 @@ jobs:
             --set-env-vars=JWT_SECRET=${{ secrets.JWT_SECRET }},\
             AUTHENTICATION_URL=${{ secrets.AUTHENTICATION_URL }},\
             PORT=8088
-
