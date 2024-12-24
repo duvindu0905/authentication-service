@@ -70,42 +70,6 @@ const login = async (req, res) => {
   }
 };
 
-// Function for login specifically for operator or admin
-const loginUser = async (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
-
-  try {
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    if (user.role !== 'operator' && user.role !== 'admin') {
-      return res.status(403).json({ message: 'Unauthorized role' });
-    }
-
-    // Directly compare the plain text password with the stored password (not recommended for production)
-    if (user.password !== password) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const token = jwt.sign(
-      { userId: user._id, role: user.role },
-      process.env.JWT_SECRET, // Secret key for JWT
-      { expiresIn: '1h' }
-    );
-
-    res.json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-
 // Function to get all users
 const getAllUsers = async (req, res) => {
   try {
@@ -122,26 +86,9 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// Function to get a user by userId
-const getUserById = async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    console.error('Error fetching user by userId:', error.message);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-
 module.exports = {
   registerUser,
   login,
-  loginUser,
   getAllUsers,
-  getUserById,
 };
+
