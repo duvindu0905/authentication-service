@@ -3,8 +3,6 @@ nibm index - YR3COBSCCOMP232P-007
 
 Api for authentication service 
 
-url: https://api.authenticationservice.bussewaya.online
+url: https://authentication-service-193893744076.us-central1.run.app/authentication-service/users
 
-example: https://api.authenticationservice.bussewaya.online/authentication-service/users
-
-swagger url: https://api.authenticationservice.bussewaya.online/api-docs/#/
+swagger url: https://authentication-service-193893744076.us-central1.run.app/api-docs/#/
