@@ -11,7 +11,7 @@
         "description": "Local Development Server"
       },
       {
-        "url": "https://api.authenticationservice.bussewaya.online",
+        "url": "https://authentication-service-193893744076.us-central1.run.app",
         "description": "Production Server"
       }
     ],
