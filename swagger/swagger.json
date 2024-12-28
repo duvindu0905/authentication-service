@@ -67,9 +67,14 @@
       },
       "/authentication-service/users": {
         "get": {
-          "summary": "Get all users (operators and admins)",
+          "summary": "Get all users (for admin only)",
           "tags": ["Authentication"],
           "operationId": "getAllUsers",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
           "responses": {
             "200": {
               "description": "List of all users",
@@ -84,38 +89,8 @@
                 }
               }
             },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          }
-        },
-        "post": {
-          "summary": "Register a new user (operator or admin)",
-          "tags": ["Authentication"],
-          "operationId": "registerUser",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "User registered successfully",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Invalid user data"
+            "403": {
+              "description": "Forbidden, only admin can access"
             },
             "500": {
               "description": "Internal Server Error"
@@ -125,6 +100,14 @@
       }
     },
     "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT",
+          "description": "JWT Authorization header using the Bearer scheme"
+        }
+      },
       "schemas": {
         "User": {
           "type": "object",
@@ -155,4 +138,5 @@
       }
     }
   }
+  
   

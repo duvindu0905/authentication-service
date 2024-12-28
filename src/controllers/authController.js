@@ -1,42 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel'); // Assuming the User model is correctly defined
 
-// Function to create a new user (operator or admin)
-const registerUser = async (req, res) => {
-  const { username, password, role } = req.body;
-
-  // Validate required fields
-  if (!username || !password || !role) {
-    return res.status(400).json({ message: 'Required fields missing' });
-  }
-
-  try {
-    // Check if the user already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Username already exists' });
-    }
-
-    // Create a new user with plain text password (not recommended for production)
-    const newUser = new User({
-      username,
-      password,  // Store password as plain text (not recommended for production)
-      role,
-    });
-
-    // Save the new user to the database
-    await newUser.save();
-
-    // Return success response
-    res.status(201).json({
-      message: 'User created successfully',
-      user: newUser,
-    });
-  } catch (error) {
-    console.error('Error registering user:', error.message);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
 
 // Function for general login (for any user: operator, admin)
 const login = async (req, res) => {
@@ -87,7 +51,6 @@ const getAllUsers = async (req, res) => {
 };
 
 module.exports = {
-  registerUser,
   login,
   getAllUsers,
 };
